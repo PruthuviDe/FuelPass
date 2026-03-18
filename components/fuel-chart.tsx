@@ -96,29 +96,29 @@ export function FuelChart({ vehicleNumber }: FuelChartProps) {
           <TabsContent value="recent" className="mt-4">
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#d5d5d0" />
                 <XAxis 
                   dataKey="date" 
-                  stroke="hsl(var(--muted-foreground))"
+                  stroke="#666666"
                   style={{ fontSize: "12px" }}
                 />
                 <YAxis 
-                  stroke="hsl(var(--muted-foreground))"
+                  stroke="#666666"
                   style={{ fontSize: "12px" }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #e5e5e0",
                     borderRadius: "8px",
                   }}
-                  labelStyle={{ color: "hsl(var(--foreground))" }}
+                  labelStyle={{ color: "#1c1c1a" }}
                   formatter={(value: any) => [`${value}L`, "Fuel"]}
                 />
                 <Legend />
                 <Bar
                   dataKey="liters"
-                  fill="hsl(var(--primary))"
+                  fill="#2955c7"
                   radius={[8, 8, 0, 0]}
                   name="Fuel (Liters)"
                 />
@@ -129,31 +129,31 @@ export function FuelChart({ vehicleNumber }: FuelChartProps) {
           <TabsContent value="weekly" className="mt-4">
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={weekData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#d5d5d0" />
                 <XAxis 
                   dataKey="day" 
-                  stroke="hsl(var(--muted-foreground))"
+                  stroke="#666666"
                   style={{ fontSize: "12px" }}
                 />
                 <YAxis 
-                  stroke="hsl(var(--muted-foreground))"
+                  stroke="#666666"
                   style={{ fontSize: "12px" }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "hsl(var(--card))",
-                    border: "1px solid hsl(var(--border))",
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #e5e5e0",
                     borderRadius: "8px",
                   }}
-                  labelStyle={{ color: "hsl(var(--foreground))" }}
+                  labelStyle={{ color: "#1c1c1a" }}
                   formatter={(value: any) => [`${value}L`, "Fuel"]}
                 />
                 <Legend />
                 <Line
                   type="monotone"
                   dataKey="liters"
-                  stroke="hsl(var(--primary))"
-                  dot={{ fill: "hsl(var(--primary))", r: 4 }}
+                  stroke="#2955c7"
+                  dot={{ fill: "#2955c7", r: 4 }}
                   activeDot={{ r: 6 }}
                   strokeWidth={2}
                   name="Fuel (Liters)"
