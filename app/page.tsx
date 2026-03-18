@@ -87,7 +87,7 @@ export default function Home() {
                   Track Fuel Eligibility in Seconds
                 </h2>
                 <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
-                  Add your vehicle, check if you can fuel today, and monitor usage trends in one clean view.
+                  Add your vehicle, check if you can fuel today, and monitor usage trends effortlessly in one clean, modern view.
                 </p>
               </div>
 
