@@ -29,7 +29,7 @@ export function VehicleSelector({
       <div className="flex items-center justify-center p-2 rounded-xl bg-secondary/80 text-secondary-foreground border border-border/50">
         <CarFront className="h-5 w-5 opacity-70" />
       </div>
-      <Select value={selectedVehicle || undefined} onValueChange={onVehicleChange}>
+      <Select value={selectedVehicle || undefined} onValueChange={(val) => { if (val) onVehicleChange(val); }}>
         <SelectTrigger className="w-full md:w-[240px] h-11 bg-card/60 backdrop-blur-sm border-border/80 shadow-sm rounded-xl">
           <SelectValue placeholder="Select a vehicle" />
         </SelectTrigger>
