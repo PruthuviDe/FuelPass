@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -27,7 +28,29 @@ interface FuelChartProps {
 }
 
 export function FuelChart({ vehicleNumber }: FuelChartProps) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const history = getFuelHistory(vehicleNumber);
+
+  if (!isClient) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Fuel Usage Chart</CardTitle>
+          <CardDescription>Visual trends of your fuel consumption</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center h-80 text-muted-foreground">
+            <p>Loading chart...</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   if (history.length === 0) {
     return (
@@ -93,73 +116,77 @@ export function FuelChart({ vehicleNumber }: FuelChartProps) {
             <TabsTrigger value="weekly">This Week</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="recent" className="mt-4">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#d5d5d0" />
-                <XAxis 
-                  dataKey="date" 
-                  stroke="#666666"
-                  style={{ fontSize: "12px" }}
-                />
-                <YAxis 
-                  stroke="#666666"
-                  style={{ fontSize: "12px" }}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#ffffff",
-                    border: "1px solid #e5e5e0",
-                    borderRadius: "8px",
-                  }}
-                  labelStyle={{ color: "#1c1c1a" }}
-                  formatter={(value: any) => [`${value}L`, "Fuel"]}
-                />
-                <Legend />
-                <Bar
-                  dataKey="liters"
-                  fill="#2955c7"
-                  radius={[8, 8, 0, 0]}
-                  name="Fuel (Liters)"
-                />
-              </BarChart>
-            </ResponsiveContainer>
+          <TabsContent value="recent" className="mt-4 w-full">
+            <div className="w-full bg-muted/30 rounded-lg overflow-hidden flex flex-col" style={{ height: "350px" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#4a4a4a" />
+                  <XAxis 
+                    dataKey="date" 
+                    stroke="#a0a0a0"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="#a0a0a0"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f1f1f",
+                      border: "1px solid #404040",
+                      borderRadius: "8px",
+                      color: "#ffffff",
+                    }}
+                    labelStyle={{ color: "#ffffff" }}
+                  />
+                  <Legend />
+                  <Bar
+                    dataKey="liters"
+                    fill="#4f9cf9"
+                    radius={[8, 8, 0, 0]}
+                    name="Fuel (Liters)"
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </TabsContent>
 
-          <TabsContent value="weekly" className="mt-4">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={weekData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#d5d5d0" />
-                <XAxis 
-                  dataKey="day" 
-                  stroke="#666666"
-                  style={{ fontSize: "12px" }}
-                />
-                <YAxis 
-                  stroke="#666666"
-                  style={{ fontSize: "12px" }}
-                />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#ffffff",
-                    border: "1px solid #e5e5e0",
-                    borderRadius: "8px",
-                  }}
-                  labelStyle={{ color: "#1c1c1a" }}
-                  formatter={(value: any) => [`${value}L`, "Fuel"]}
-                />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="liters"
-                  stroke="#2955c7"
-                  dot={{ fill: "#2955c7", r: 4 }}
-                  activeDot={{ r: 6 }}
-                  strokeWidth={2}
-                  name="Fuel (Liters)"
-                />
-              </LineChart>
-            </ResponsiveContainer>
+          <TabsContent value="weekly" className="mt-4 w-full">
+            <div className="w-full bg-muted/30 rounded-lg overflow-hidden flex flex-col" style={{ height: "350px" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={weekData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#4a4a4a" />
+                  <XAxis 
+                    dataKey="day" 
+                    stroke="#a0a0a0"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis 
+                    stroke="#a0a0a0"
+                    tick={{ fontSize: 12 }}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#1f1f1f",
+                      border: "1px solid #404040",
+                      borderRadius: "8px",
+                      color: "#ffffff",
+                    }}
+                    labelStyle={{ color: "#ffffff" }}
+                  />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="liters"
+                    stroke="#4f9cf9"
+                    dot={{ fill: "#4f9cf9", r: 4 }}
+                    activeDot={{ r: 6 }}
+                    strokeWidth={2}
+                    name="Fuel (Liters)"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </TabsContent>
         </Tabs>
 
